@@ -1,5 +1,6 @@
 package vn.cloud.helloservice;
 
+import io.micrometer.core.annotation.Timed;
 import io.micrometer.observation.annotation.Observed;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -69,9 +70,7 @@ public class HelloServiceApplication {
 
 	@Service
 	class SleepService {
-//		@Timed(value = "do.sleep.method.timed")
-//		@NewSpan(value = "do-sleep-method-span")
-		@Observed(name = "do.sleep.method.timed", contextualName = "do-sleep-method-span", lowCardinalityKeyValues = {"low", "low"})
+	@Timed(value = "do.sleep.method.timed")
 		public Long doSleep(Long ms) {
 			try {
 				TimeUnit.MILLISECONDS.sleep(ms);
